@@ -17,6 +17,9 @@
       #pincel {
         float: right;
       }
+      #style {
+        float: right;
+      }
       #drawer {
         position: absolute;
       }
@@ -37,6 +40,7 @@
     >Descarg&aacute; tu H1!</a
   >
   <br />
+  <br />
   <input type="color" id="picker" onchange="changeColor(event.target.value)" />
   <br />
   <br />
@@ -52,10 +56,11 @@
     onchange="changeSize(event.target)"
   />
   <br />
+  <br />
   <div id="pincel">
-    <input type="radio" id="draw" name="gender" value="draw" checked />
+    <input type="radio" id="draw" value="draw" checked />
     <label for="draw">Dibujar</label><br />
-    <input type="radio" id="erase" name="gender" value="female" />
+    <input type="radio" id="erase" value="female" />
     <label for="erase">Borrar</label><br />
   </div>
   <body>
