@@ -14,6 +14,9 @@
       #sizeSelector {
         float: right;
       }
+      #pincel {
+        float: right;
+      }
       #drawer {
         position: absolute;
       }
@@ -36,7 +39,9 @@
   <br />
   <input type="color" id="picker" onchange="changeColor(event.target.value)" />
   <br />
+  <br />
   <input type="button" value="Borrar" onclick="initCanvas()" id="clear" />
+  <br />
   <br />
   <input
     type="range"
@@ -46,14 +51,23 @@
     id="sizeSelector"
     onchange="changeSize(event.target)"
   />
+  <br />
+  <div id="pincel">
+    <input type="radio" id="draw" name="gender" value="draw" checked />
+    <label for="draw">Dibujar</label><br />
+    <input type="radio" id="erase" name="gender" value="female" />
+    <label for="erase">Borrar</label><br />
+  </div>
   <body>
     <script>
       const canvas = document.getElementById("drawer");
       const context = canvas.getContext("2d");
       context.lineWidth = 5;
+      let currColor = "#000";
       let lastX = null;
       let lastY = null;
 
+      const isDrawing = () => document.getElementById("draw").checked;
       const draw = (e) => {
         if (!e.buttons) return;
         const x = e.clientX;
@@ -61,6 +75,11 @@
         if (lastX === null) {
           lastX = x;
           lastY = y;
+          if (isDrawing()) {
+            context.strokeStyle = currColor;
+          } else {
+            context.strokeStyle = "#ddd";
+          }
           return;
         }
         context.beginPath();
@@ -74,7 +93,7 @@
         lastX = null;
         lastY = null;
       };
-      const changeColor = (color) => (context.strokeStyle = color);
+      const changeColor = (color) => (currColor = color);
       const downloadImage = (event) => {
         event.target.href = canvas.toDataURL("image/png");
       };
