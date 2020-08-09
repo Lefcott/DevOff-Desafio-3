@@ -2,21 +2,26 @@
   <head>
     <title>DibujadorH1</title>
     <style>
-      #canvas {
-        background-color: #ddd;
-      }
       #picker {
         float: right;
       }
+      #container {
+        position: absolute;
+        background-color: #ddd;
+        width: 500px;
+        height: 500px;
+      }
     </style>
   </head>
-  <canvas
-    width="500"
-    height="500"
-    onmousemove="draw(event)"
-    onmouseup="stopDrawing()"
-    id="drawer"
-  ></canvas>
+  <div id="container">
+    <canvas
+      width="500"
+      height="500"
+      onmousemove="draw(event)"
+      onmouseup="stopDrawing()"
+      id="drawer"
+    ></canvas>
+  </div>
   <input type="color" id="picker" onchange="changeColor(event.target.value)" />
   <body>
     <script>
