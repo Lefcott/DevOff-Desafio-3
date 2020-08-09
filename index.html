@@ -5,27 +5,39 @@
       #picker {
         float: right;
       }
-      #container {
+      #clear {
+        float: right;
+      }
+      #download {
+        float: right;
+      }
+      #drawer {
         position: absolute;
-        background-color: #ddd;
-        width: 500px;
-        height: 500px;
       }
     </style>
   </head>
-  <div id="container">
-    <canvas
-      width="500"
-      height="500"
-      onmousemove="draw(event)"
-      onmouseup="stopDrawing()"
-      id="drawer"
-    ></canvas>
-  </div>
+  <canvas
+    width="500"
+    height="500"
+    onmousemove="draw(event)"
+    onmouseup="stopDrawing()"
+    id="drawer"
+  ></canvas>
+  <a
+    id="download"
+    download="myImage.png"
+    href=""
+    onclick="downloadImage(event);"
+    >Descarg&aacute; tu H1!</a
+  >
+  <br />
   <input type="color" id="picker" onchange="changeColor(event.target.value)" />
+  <br />
+  <input type="button" value="Borrar" onclick="initCanvas()" id="clear" />
   <body>
     <script>
-      const context = document.getElementById("drawer").getContext("2d");
+      const canvas = document.getElementById("drawer");
+      const context = canvas.getContext("2d");
       context.lineWidth = 5;
       let lastX = null;
       let lastY = null;
@@ -51,6 +63,14 @@
         lastY = null;
       };
       const changeColor = (color) => (context.strokeStyle = color);
+      const downloadImage = (event) => {
+        event.target.href = canvas.toDataURL("image/png");
+      };
+      const initCanvas = () => {
+        context.fillStyle = "#ddd";
+        context.fillRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      };
+      initCanvas();
     </script>
   </body>
 </html>
