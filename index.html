@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>DibujadorH1</title>
+  </head>
+  <canvas
+    width="500"
+    height="500"
+    onmousemove="draw(event)"
+    onmouseup="stopDrawing()"
+    id="drawer"
+  ></canvas>
+  <body>
+    <script>
+      const context = document.getElementById("drawer").getContext("2d");
+      context.fillStyle = "#5F5";
+      let lastX = null;
+      let lastY = null;
+
+      const draw = (e) => {
+        if (!e.buttons) return;
+        const x = e.clientX;
+        const y = e.clientY;
+        if (lastX === null) {
+          lastX = x;
+          lastY = y;
+          return;
+        }
+        context.beginPath();
+        context.moveTo(lastX, lastY);
+        context.lineTo(x, y);
+        context.stroke();
+        lastX = x;
+        lastY = y;
+      };
+      const stopDrawing = () => {
+        lastX = null;
+        lastY = null;
+      };
+    </script>
+  </body>
+</html>
