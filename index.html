@@ -11,6 +11,9 @@
       #download {
         float: right;
       }
+      #sizeSelector {
+        float: right;
+      }
       #drawer {
         position: absolute;
       }
@@ -34,6 +37,15 @@
   <input type="color" id="picker" onchange="changeColor(event.target.value)" />
   <br />
   <input type="button" value="Borrar" onclick="initCanvas()" id="clear" />
+  <br />
+  <input
+    type="range"
+    min="1"
+    max="50"
+    value="5"
+    id="sizeSelector"
+    onchange="changeSize(event.target)"
+  />
   <body>
     <script>
       const canvas = document.getElementById("drawer");
@@ -65,6 +77,9 @@
       const changeColor = (color) => (context.strokeStyle = color);
       const downloadImage = (event) => {
         event.target.href = canvas.toDataURL("image/png");
+      };
+      const changeSize = (elem) => {
+        context.lineWidth = +elem.value;
       };
       const initCanvas = () => {
         context.fillStyle = "#ddd";
