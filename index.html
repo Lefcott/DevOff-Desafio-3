@@ -1,6 +1,14 @@
 <html>
   <head>
     <title>DibujadorH1</title>
+    <style>
+      #canvas {
+        background-color: #ddd;
+      }
+      #picker {
+        float: right;
+      }
+    </style>
   </head>
   <canvas
     width="500"
@@ -9,10 +17,11 @@
     onmouseup="stopDrawing()"
     id="drawer"
   ></canvas>
+  <input type="color" id="picker" onchange="changeColor(event.target.value)" />
   <body>
     <script>
       const context = document.getElementById("drawer").getContext("2d");
-      context.fillStyle = "#5F5";
+      context.lineWidth = 5;
       let lastX = null;
       let lastY = null;
 
@@ -36,6 +45,7 @@
         lastX = null;
         lastY = null;
       };
+      const changeColor = (color) => (context.strokeStyle = color);
     </script>
   </body>
 </html>
